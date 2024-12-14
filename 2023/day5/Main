@@ -1,0 +1,25 @@
+seeds=[487758422,524336848,2531594804,27107767,1343486056,124327551,1117929819,93097070,3305050822,442320425,2324984130,87604424,4216329536,45038934,1482842780,224610898,115202033,371332058,2845474954,192579859]
+file = open("day5input.txt","r")
+filestring = ""
+fileList = []
+newFileList = []
+for line in file:
+    filestring +=line
+    
+print(filestring)
+
+fileList = filestring.split("\n")
+
+for part in fileList:
+    if part == " " or part[0].isnumeric() == False:
+        pass
+    else:
+        newFileList.append(part)
+        
+print(newFileList)
+
+
+
+
+
+
