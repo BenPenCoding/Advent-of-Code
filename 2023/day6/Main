@@ -1,0 +1,19 @@
+timeP = 0
+speed = 0
+time = 0 
+Sum = 0
+
+for timeP in range(60808676):    
+    speed = timeP
+    time = 60808676 - timeP
+    distance = speed * time
+    if distance > 601116315591300:
+        Sum += 1
+    
+print(Sum)
+
+    
+    
+
+
+
