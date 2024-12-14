@@ -1,0 +1,26 @@
+#globals
+fileString = ""
+DOWNLEFT = 140
+DOWNRIGHT = 144
+BELOW = 141
+charCount = 0
+num = ""
+
+#Turn whole file into a string
+
+file = open("day3input.txt","r")
+fileString = ""
+for line in file:
+    fileString = fileString + line
+char = ""
+
+while char != "Ω":
+    char = fileString[charCount]
+    if char.isnumeric():
+        
+        if fileString[charcount+1].isnumeric():
+            charCount +=1
+            
+            if fileString[charcount+1].isnumeric():
+                charCount +=1
+
