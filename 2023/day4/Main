@@ -1,0 +1,90 @@
+oldC = []
+newC = []
+newStr = ""
+newerC = []
+winNums = []
+oNums = []
+count = 0
+matches = 0
+score = 0
+tScore = 0
+file = open("day4input.txt","r")
+for line in file:
+    oldC.append(line)
+
+for i in oldC:
+    temp = i[8:]
+    newC.append(temp)
+    
+
+
+for part in newC:
+    newStr = ""
+    indexC = 0
+
+    for index in part:
+        try:
+            if index == " " and part[indexC+1].isnumeric() and part[indexC+2].isnumeric() == False:
+                newStr = newStr + "0"
+                
+            else:
+                newStr = newStr + index
+        except:
+            newStr = newStr + "0"
+        indexC +=1
+    newerC.append(newStr)
+    
+
+ 
+#FINDS WINNING NUMS
+
+for i in newerC:
+    count = 0
+    check = 0
+    score = 0
+    winNums = []
+    for char in i:
+        if check == 0:
+            num = ""
+            if count > 0 and char.isnumeric() and i[count-1].isnumeric():
+                num = i[count-1] + char
+                winNums.append(num)
+                count +=1
+                
+            else:
+                count +=1
+                if char == "|":
+                    check =1
+        else:
+            pass
+
+
+
+    oNums =[]
+
+
+    count = i.find('|')+1
+    for cha in i[i.find('|')+1:]:
+        if count > 0 and cha.isnumeric() and i[count-1].isnumeric():
+            num = i[count-1] + cha
+            oNums.append(num)
+        count +=1
+
+
+    matches = 0
+    for b in winNums:
+        for n in oNums:
+            if b == n:
+                matches +=1
+            else:
+                pass
+    score = 0
+    
+    if matches == 0:
+        score = 0
+    elif matches ==1:
+        score = 1
+    else:
+        score = 2 ** (matches-1)
+    tScore = tScore + score
+    print(tScore)
