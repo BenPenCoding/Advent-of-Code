@@ -1,0 +1,58 @@
+
+count = 0
+charCount = 0
+var = ''
+
+file = open("day2input.txt", "r")
+
+for line in file:
+    count +=1
+    charCount = 8
+    print(line[8:])
+        for char in line:
+            if char.isnumeric():
+                if line[charCount+1].isnumeric():
+
+                    char = char + line[charCount+1]
+                    colour = line[charCount+3]
+                    if colour == "r":
+                        if int(char) > RED:
+                            CV = 1
+                        else:
+                            pass
+                    
+                    if colour == "g":
+                        if int(char) > GREEN:
+                            CV = 1
+                        else:
+                            pass
+                    
+                    if colour == "b":
+                        if int(char) > BLUE:
+                            CV = 1
+                        else:
+                            pass
+                else:
+
+                    colour = line[charCount+2]
+                    
+                    if colour == "r":
+                        if int(char) > RED:
+                            CV = 1
+                        else:
+                            pass
+                    
+                    if colour == "g":
+                        if int(char) > GREEN:
+                            CV = 1
+                        else:
+                            pass
+                    
+                    if colour == "b":
+                        if int(char) > BLUE:
+                            CV = 1
+                        else:
+                            pass
+            charCount +=1        
+    
+   
