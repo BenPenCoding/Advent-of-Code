@@ -1,0 +1,80 @@
+count = 0
+charCount = 0
+var = ''
+hRed = 0
+hGreen = 0
+hBlue = 0
+power = 0
+totalPower = 0
+file = open("day2input.txt", "r")
+
+for line in file:
+    count +=1
+    charCount = 8
+
+    print(line[8:])
+    hRed = 0
+    hGreen = 0
+    hBlue = 0
+    power = 0
+    for char in line[8:]:
+        if char.isnumeric():
+            if line[charCount+1].isnumeric():
+
+                char = char + line[charCount+1]
+                colour = line[charCount+3]
+                
+                if colour == "r":
+                    if hRed < int(char):
+                        hRed = int(char)
+                else:
+                    pass
+                
+                if colour == "g":
+                    if hGreen < int(char):
+                        hGreen = int(char)
+                        
+                else:
+                    pass
+                
+                if colour == "b":
+                    if hBlue < int(char):
+                        hBlue = int(char)
+                        
+                else:
+                    pass
+            else:
+
+                colour = line[charCount+2]
+                
+                if colour == "r":
+                    if hRed < int(char):
+                        hRed = int(char)
+                        
+                else:
+                    pass
+                
+                if colour == "g":
+                    if hGreen < int(char):
+                        hGreen = int(char)
+                        
+                else:
+                    pass
+                
+                if colour == "b":
+                    if hBlue < int(char):
+                        hBlue = int(char)
+
+                        
+                else:
+                    pass
+        power = hRed*hGreen*hBlue
+        charCount +=1          
+    totalPower = totalPower + power
+    print(f"red max is {hRed}, green max is {hGreen}, blue max is {hBlue}")      
+          
+    
+
+   
+   
+   
