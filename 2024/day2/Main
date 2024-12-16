@@ -1,1 +1,90 @@
+def isSafe(nums):
+    safe = True
+    
+    num = 0
+    lastNum = 0
+    
+    if int(nums[1]) - int(nums[2]) > 0: changeIncreasing = False
+    elif int(nums[1]) - int(nums[2]) == 0: safe = False
+    else: changeIncreasing = True
+    
+    if safe == True:
+        for j in range(len(nums)):
+
+            num = int(nums[j])
+            
+            
+            if j == 0:
+                
+                lastNum = num
+            else:
+                
+                if changeIncreasing == True:
+                    if num - lastNum < 0 or num - lastNum == 0:
+                       safe = False
+                    else:
+                        if num - lastNum > 3:
+                            safe = False
+                else:
+                    if num - lastNum > 0 or num - lastNum == 0:
+                        safe = False
+                    else:
+                        if num - lastNum < -3:
+                            safe = False
+                
+                lastNum = num
+    return safe
+
+def allButIndex(List,index):
+    returnList = []
+    for i in range(len(List)):
+        value = List[i]
+        if i == index:
+            pass
+        else:
+            returnList.append(value)
+    return returnList
+
+
+file = open("AOCday2p1.txt","r")
+
+rList = []
+lList = []
+tList = []
+
+for line in file:
+    rList.append(line)
+
+file.close()
+
+for report in rList:
+    lList = []
+    tempString = ""
+    
+    for i in report:
+        
+        if i == " ":
+            lList.append(tempString)
+            tempString = ""
+        else:
+            tempString += i
+    lList.append(tempString)
+    tList.append(lList)
+    
+numOfSafe = 0    
+
+for i in tList:
+    safe = False
+    for j in range(len(i)):
+        if i[j] != '\n':
+            if isSafe(allButIndex(i,j)):
+                safe = True
+    if safe == True:
+        numOfSafe +=1
+                    
+print(numOfSafe)
+
+
+
+
 
