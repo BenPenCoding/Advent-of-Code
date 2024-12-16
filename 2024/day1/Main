@@ -1,2 +1,76 @@
+file = open("AOCday1p1"+".txt", "r")
+
+list1 = []
+list2 = []
+
+for line in file:
+    string1 = ""
+    string2 = ""
+    for i in range(10):
+        if i <= 4:
+            string1 += line[i]
+        else:
+            string2 += line[i]
+    list1.append(string1)
+    list2.append(string2)
+
+file.close()
+
+
+
+
+
+
+
+sScore = 0
+
+for i in range(len(list1)):
+    num = list1[i]
+    numTimes = 0
+    
+    for j in list2:
+        if num == j:
+            numTimes += 1
+
+    sScore += int(num) * numTimes
+
+print(sScore)
+
+
+
+
+sortedList1 = []
+sortedList2 = []
+
+for i in range(len(list1)):
+    sortedList1.append(list1[i])
+    sortedList2.append(list2[i])
+
+sortedList1.sort()
+sortedList2.sort()
+
+difference = 0
+
+for i in range(len(sortedList1)):
+    
+    num1 = sortedList1[i]
+    num2 = sortedList2[i]
+
+    difference += abs(int(num2) - int(num1))
+    
+print(difference)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
