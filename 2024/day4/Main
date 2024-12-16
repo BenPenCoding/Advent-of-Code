@@ -1,1 +1,196 @@
+#Subs
+def readFile():
+    file = open("AOCday4p1.txt","r")
+
+    letters = []
+    tempLetters = []
+
+    for line in file:
+        tempLetters = []
+
+        for i in line:
+            if i!= "\n": tempLetters.append(i)
+            else: None
+    
+        letters.append(tempLetters)
+    file.close()
+    return letters
+
+def findFD(array):
+    one = ""
+    two = ""
+    three = ""
+    four = ""
+    word = ""
+    row = 0
+    column = 0
+    count = 0
+    
+    for i in range(len(array[0])):
+        row = 0
+        column = i
+
+        while True:
+            try:
+                four = array[row][column]
+                three = array[row+1][column+1]
+                two = array[row+2][column+2]
+                one = array[row+3][column+3]
+                
+                word = four + three + two + one
+                #print(word)
+                
+                if word == "XMAS" or word[::-1] == "XMAS":
+                    count +=1
+                
+                row += 1
+                column += 1
+            
+            except: break
+ 
+    for i in range(len(array)):
+        row = len(array)-i
+        column = 0
+        
+        while True:
+            try:
+                four = array[row][column]
+                three = array[row+1][column+1]
+                two = array[row+2][column+2]
+                one = array[row+3][column+3]
+                
+                word = four + three + two + one
+                #print(word)
+                
+                if word == "XMAS" or word[::-1] == "XMAS":
+                    count +=1
+                
+                row += 1
+                column += 1
+            
+            except: break
+        
+    return count
+
+def findBD(array):
+    one = ""
+    two = ""
+    three = ""
+    four = ""
+    word = ""
+    row = 0
+    column = 0
+    count = 0
+    
+    for i in range(len(array[0])):
+        row = 0
+        column = len(array[0])-i-1
+
+        while True:
+            try:
+                if column >= 3: 
+                    four = array[row][column]
+                    three = array[row+1][column-1]
+                    two = array[row+2][column-2]
+                    one = array[row+3][column-3]
+                    
+                    word = four + three + two + one
+                    #print(word)
+                    
+                    if word == "XMAS" or word[::-1] == "XMAS":
+                        count +=1
+                    
+                    row += 1
+                    column -= 1
+                else: print(1/0)
+            except: break
+
+
+
+    for i in range(len(array)):
+        row = len(array)-i
+        column = len(array)-1
+        
+        while True:
+            try:
+                if column >= 3: 
+                    four = array[row][column]
+                    three = array[row+1][column-1]
+                    two = array[row+2][column-2]
+                    one = array[row+3][column-3]
+                    
+                    word = four + three + two + one
+                    #print(word)
+                    
+                    if word == "XMAS" or word[::-1] == "XMAS":
+                        count +=1
+                    
+                    row += 1
+                    column -= 1
+                else: print(1/0)
+            except: break
+
+    return count
+
+def findH(array):
+    one = ""
+    two = ""
+    three = ""
+    four = ""
+    word = ""
+    count = 0
+    
+    for i in array:
+        for j in range(len(i)):
+            try:
+                one = i[j]
+                two = i[j+1]
+                three = i[j+2]
+                four = i[j+3]
+                word = one + two + three + four
+                #print(word)
+                if word == "XMAS" or word[::-1] == "XMAS":
+                    count +=1
+            except: None
+    return count                  
+
+def findV(array):
+    one = ""
+    two = ""
+    three = ""
+    four = ""
+    word = ""
+    count = 0
+    
+    for i in range (len(array[0])):
+        for j in range(len(array)):
+            try:
+                one = array[j][i]
+                two = array[j+1][i]
+                three = array[j+2][i]
+                four = array[j+3][i]
+                word = one + two + three + four
+                #print(word)
+                if word == "XMAS" or word[::-1] == "XMAS":
+                    count +=1
+            except: None
+    return count             
+
+
+#Main
+
+letters = readFile()
+print(findV(letters)+findH(letters) + findFD(letters) + findBD(letters))
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
 
