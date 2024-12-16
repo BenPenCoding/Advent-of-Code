@@ -1,1 +1,87 @@
+'''def multNums(List):
+    total = 0
+    for i in List:
+        total += int(i[0]) * int(i[1])
+    return total'''
+
+
+file = open("AOCday3p1.txt", "r")
+string = file.read()
+file.close()
+
+print(f"{string}\n")
+
+numbers = []
+
+first  = ""
+second = ""
+third = ""
+total = ""
+i = 0
+numString = ""
+num1 = 0
+num2 = 0
+totalNum = 0
+
+enabled = True
+
+while i < len(string):
+    if i < 2:
+        pass
+    
+    elif i == 2:
+        first = string[2]
+        second = string[1]
+        third = string[0]
+    
+    else:
+        
+        if i > 1 and string[i-3] + string[i-2] + string[i-1] + string[i] == "do()":
+            enabled = True
+        if i > 5 and string[i-6] + string[i-5] + string[i-4] + string[i-3] + string[i-2] + string[i-1] + string[i] == "don't()":
+            print( string[i-6] + string[i-5] + string[i-4] + string[i-3] + string[i-2] + string[i-1] + string[i])
+            enabled = False
+            
+        
+        total = third + second + first
+        if total == "mul":
+            
+            if string[i] == "(":
+                
+                j = i + 1
+                numString = ""
+                num1 = 0
+                while string[j].isnumeric():
+                    numString += string[j]
+                    j+=1
+                num1 = numString
+                #print(f"NUM 1 = {num1}")
+                
+                if string[j] == ",":
+                    
+                    k = j + 1
+                    numString = ""
+                    num2 = 0
+                    while string[k].isnumeric():
+                        numString += string[k]
+                        k+=1
+                    num2 = numString
+                    #print(f"NUM 2 = {num2}")
+                    
+                    if string[k] == ")":
+                        #print(f"NUM 1 = {num1}, NUM 2 = {num2}")
+                        if enabled == True:
+                            totalNum += int(num1) * int(num2)
+                        
+
+        third = second
+        second = first
+        first = string[i]
+        #print(total)
+    
+    i+= 1
+
+
+print(totalNum)
+
 
