@@ -1,0 +1,34 @@
+#Subs
+def readFile():
+    file = open("AOCday4p1.txt","r")
+
+    letters = []
+    tempLetters = []
+
+    for line in file:
+        tempLetters = []
+
+        for i in line:
+            if i!= "\n": tempLetters.append(i)
+            else: None
+    
+        letters.append(tempLetters)
+    file.close()
+    return letters
+
+letters = readFile()
+
+count = 0
+
+for i in range(len(letters)):
+    for j in range(len(letters[0])):
+        try: 
+            letter = letters[i][j]
+            word = letter + letters[i+1][j+1] + letters[i+2][j+2]
+            if word == "MAS" or word == "SAM":
+                newLetter = letters[i][j+2]
+                newWord = newLetter + letters[i+1][j+1] + letters[i+2][j]
+                if newWord == "MAS" or newWord == "SAM":
+                    count +=1
+        except: None
+
