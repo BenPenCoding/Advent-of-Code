@@ -1,1 +1,202 @@
 
+def readFile(string):
+    grid = []
+    lineList = []
+    file = open(string+".txt", "r")
+    for line in file:
+        if line[-1::] == "\n":
+            line = line[:-1:]
+        lineList = []
+        for i in line:
+            lineList.append(i)
+        grid.append(lineList)
+    return grid
+
+def findGuard(grid):
+    for i in grid:
+        for j in i:
+            if j == "^":
+                columnIndex = i.index(j)
+                rowIndex = grid.index(i)
+                return columnIndex, rowIndex
+    
+
+def changeDirection(direction):
+    directions = ["left","down","right","up"]
+    index = directions.index(direction)
+    if index == 0:
+        index = 3
+    else:
+        index -= 1
+    direction = directions[index]
+    return direction
+
+def checkMove(grid, columnIndex, rowIndex, direction):
+    
+    if direction == "up":
+        try:
+            if rowIndex -1 < 0:
+                return "OOB" #(Out Of Bounds)
+            if grid[rowIndex-1][columnIndex] !="#": return True
+            else: return False
+        except IndexError:
+            return "OOB" #(Out Of Bounds)
+            
+    elif direction == "right":
+        try:
+            if grid[rowIndex][columnIndex+1] !="#": return True
+            else: return False
+        except IndexError:
+            return "OOB" #(Out Of Bounds)
+    
+    elif direction == "down":
+        try:
+            if grid[rowIndex+1][columnIndex] !="#": return True
+            else: return False
+        except IndexError:
+            return "OOB" #(Out Of Bounds)
+        
+    elif direction == "left":
+        try:
+            if columnIndex-1 < 0:
+                return "OOB" #(Out Of Bounds)
+            if grid[rowIndex][columnIndex-1] !="#": return True
+            else: return False
+        except IndexError:
+            return "OOB" #(Out Of Bounds)
+    
+    else: None
+
+def displayGrid(grid):
+    for i in grid:
+        print(i)
+    print("\n")
+
+
+def move(grid, columnIndex, rowIndex, oldValue, direction, count):
+    
+    if direction == "up":
+        newValue = grid[rowIndex-1][columnIndex]
+        if oldValue == "X":
+            grid[rowIndex][columnIndex] = oldValue
+        else:
+            count += 1
+            grid[rowIndex][columnIndex] = "X"
+        grid[rowIndex-1][columnIndex] = "^"
+        
+        return grid, newValue, count
+    
+    elif direction == "right":
+        newValue = grid[rowIndex][columnIndex+1]
+        if oldValue == "X":
+            grid[rowIndex][columnIndex] = oldValue
+        else:
+            count += 1
+            grid[rowIndex][columnIndex] = "X"
+        grid[rowIndex][columnIndex+1] = "^"
+        
+        return grid, newValue, count
+
+    elif direction == "down":
+        newValue = grid[rowIndex+1][columnIndex]
+        if oldValue == "X":
+            grid[rowIndex][columnIndex] = oldValue
+        else:
+            count += 1
+            grid[rowIndex][columnIndex] = "X"
+        grid[rowIndex+1][columnIndex] = "^"
+        
+        return grid, newValue, count
+        
+    elif direction == "left":
+        newValue = grid[rowIndex][columnIndex-1]
+        if oldValue == "X":
+            grid[rowIndex][columnIndex] = oldValue
+        else:
+            count += 1
+            grid[rowIndex][columnIndex] = "X"
+        grid[rowIndex][columnIndex-1] = "^"
+        
+        return grid, newValue, count
+    
+grid = readFile("AOCday6p1")
+
+
+oColumn, oRow = findGuard(grid)
+print(oColumn)
+print(oRow)
+
+direction = "up"
+count = 1
+oldValue = "X"
+for i in range(10000):
+    #displayGrid(grid)
+    #print(f"{count}\n\n")
+    column, row = findGuard(grid)
+    canMove = checkMove(grid, column, row, direction)
+    if canMove == True:
+        grid, oldValue, count = move(grid, column, row, oldValue, direction, count)
+    elif canMove == False:
+        direction = changeDirection(direction)
+    elif canMove == "OOB":
+        count+=1
+        column, row = findGuard(grid)
+        break
+    else: None
+
+column, row = findGuard(grid)
+grid[row][column] = "X"
+grid[oRow][oColumn] = "^"
+
+def checkLoop(grid):
+    direction = "up"
+    count = 1
+    oldValue = "X"
+    for i in range(10000):
+        #displayGrid(grid)
+        #print(f"{count}\n\n")
+        column, row = findGuard(grid)
+        canMove = checkMove(grid, column, row, direction)
+        if canMove == True:
+            grid, oldValue, count = move(grid, column, row, oldValue, direction, count)
+        elif canMove == False:
+            direction = changeDirection(direction)
+        elif canMove == "OOB":
+            count+=1
+            column, row = findGuard(grid)
+            return False
+            break
+        else: None
+
+
+
+numOfLoops = 0
+
+
+
+for i in range(len(grid)):
+    for j in range(len(grid[i])):
+        
+        if grid[i][j]== "X":
+            startGrid = readFile("AOCday6p1")
+            startGrid[i][j] = "#"
+            #displayGrid(startGrid)
+            if checkLoop(startGrid) != False:
+                numOfLoops += 1
+                print("Loop")
+            column, row = findGuard(startGrid)
+            startGrid[row][column] = "X"
+            startGrid[oRow][oColumn] = "^"
+            #displayGrid(startGrid)
+print(numOfLoops)
+
+
+
+
+
+
+
+
+
+
+
