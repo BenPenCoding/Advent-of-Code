@@ -1,6 +1,6 @@
 file = open("AOCday1p1"+".txt", "r")
 
-list1 = []
+list1 =  []
 list2 = []
 
 for line in file:
