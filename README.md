@@ -1,4 +1,4 @@
-# Advent-of-Code
+# Advent of Code solutions
 
 #### My solutions to the Advent of Code 2023 and 2024 problems.
 
