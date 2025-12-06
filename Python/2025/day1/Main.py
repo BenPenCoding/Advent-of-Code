@@ -1,26 +1,11 @@
-file = open("puzzle.txt","r")
+#Functions
 
-puzzleArray = []
-
-for line in file:
-
-    puzzleArray.append(line)
-
-print(puzzleArray)
-
-pointer = 49
-
-array = []
-
-for i in range(100):
-
-    array.append(i)
-
-def shiftPointer(pointer, rotation):
+def shiftPointer(pointer, rotation, numZeros):
 
     if rotation[0] == 'L':
 
-        pointer -= rotation[0]
+        pointer -= int(rotation[1:]) % 100 
+
 
         if pointer < 0:
 
@@ -28,12 +13,44 @@ def shiftPointer(pointer, rotation):
 
     else:
 
-        pointer += rotation[1]
+        pointer += int(rotation[1:]) % 100 
 
         if pointer > 99:
 
             pointer -= 100
 
     return pointer
+
+#Setup
+
+file = open("/Users/benpennycook/Desktop/Uni/Advent-of-Code/Python/2025/day1/puzzle.txt","r")
+
+puzzleArray = []
+
+for line in file:
+
+    puzzleArray.append(line.replace('\n', ''))
+
+pointer = 50
+
+numZeros = 0
+
+#Main
+
+for rotation in puzzleArray:
+
+    print(rotation)
+
+    pointer = shiftPointer(pointer, rotation, numZeros)
+
+    print(pointer)
+
+    if pointer == 0:
+
+        numZeros += 1
+
+print(numZeros)
+
+
 
 
