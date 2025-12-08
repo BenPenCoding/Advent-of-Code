@@ -10,14 +10,14 @@ for line in file:
 
 joltageArray = []
 
-'''
+
 
 for batteryLine in batteryArray:
 
     joltageArray.append(int(f"{max(batteryLine[:-1])}{max(batteryLine[batteryLine.index(max(batteryLine[:-1])) + 1:])}"))
 
 print(sum(joltageArray))
-'''
+
 
 #Part 2
 
