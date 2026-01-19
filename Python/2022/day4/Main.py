@@ -1,0 +1,1 @@
+file = open('Python/2022/day4/puzzle.txt', 'r')
